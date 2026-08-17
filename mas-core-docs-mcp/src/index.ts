@@ -7,16 +7,16 @@ import { searchDocs, fetchToc, fetchDocContent, type TocItem } from "./ibm-docs-
 import { extractAndConvert, stripHtmlTags } from "./utils.js";
 
 const server = new McpServer({
-  name: "apic-docs",
+  name: "mas-core-docs",
   version: "1.0.0",
 });
 
 // Tool 1: Search docs
 server.tool(
-  "search_apic_docs",
-  "Search IBM API Connect 12.1.0 documentation. Returns matching topics with titles, snippets, and URLs.",
+  "search_mas_core_docs",
+  "Search IBM Maximo Application Suite documentation. Returns matching topics with titles, snippets, and URLs.",
   {
-    query: z.string().describe("Search query (e.g. 'gateway', 'oauth', 'catalog')"),
+    query: z.string().describe("Search query (e.g. 'install', 'licensing', 'mongodb', 'operator')"),
     start: z.number().optional().default(0).describe("Result offset for pagination"),
     limit: z.number().optional().default(10).describe("Number of results (max 20)"),
   },
@@ -59,13 +59,13 @@ server.tool(
 
 // Tool 2: Read a doc page
 server.tool(
-  "read_apic_doc",
-  "Read a specific IBM API Connect documentation page and return its content as Markdown. Use the 'href' from search results or TOC.",
+  "read_mas_core_doc",
+  "Read a specific IBM Maximo Application Suite documentation page and return its content as Markdown. Use the 'href' from search results or TOC.",
   {
     href: z
       .string()
       .describe(
-        "Document href path (e.g. 'SSMNED_12.1.x_cd/com.ibm.apic.overview.doc/api_management_overview.html')"
+        "Document href path (e.g. 'SSRHPA_cd/appsuite/overview/c_technical_overview.html')"
       ),
   },
   async ({ href }) => {
@@ -86,13 +86,13 @@ server.tool(
 
 // Tool 3: Get table of contents
 server.tool(
-  "get_apic_toc",
-  "Get the table of contents for IBM API Connect 12.1.0 documentation. Shows the full document structure with sections and topics.",
+  "get_mas_core_toc",
+  "Get the table of contents for IBM Maximo Application Suite documentation. Shows the full document structure with sections and topics.",
   {
     section: z
       .string()
       .optional()
-      .describe("Optional: filter to a specific section by label (e.g. 'Installing', 'Security')"),
+      .describe("Optional: filter to a specific section by label (e.g. 'Installing', 'Security', 'Licensing')"),
   },
   async ({ section }) => {
     try {
@@ -129,7 +129,7 @@ server.tool(
         content: [
           {
             type: "text" as const,
-            text: `# IBM API Connect 12.1.0 - Table of Contents\n\n${formatToc(topics)}`,
+            text: `# IBM Maximo Application Suite - Table of Contents\n\n${formatToc(topics)}`,
           },
         ],
       };
@@ -145,7 +145,7 @@ server.tool(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("APIC Docs MCP server running on stdio");
+  console.error("MAS Core Docs MCP server running on stdio");
 }
 
 main().catch((error) => {

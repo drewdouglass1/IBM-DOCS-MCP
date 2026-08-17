@@ -91,7 +91,7 @@ server.tool(
     section: z
       .string()
       .optional()
-      .describe("Optional: filter to a specific section by label (e.g. '설치', 'DataStage', 'Security')"),
+      .describe("Optional: filter to a specific section by label (e.g. 'Installing', 'DataStage', 'Security')"),
     lang: z.enum(["ko", "en"]).optional().default("ko").describe("Language: 'ko' or 'en'"),
   },
   async ({ section, lang }) => {

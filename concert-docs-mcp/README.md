@@ -1,29 +1,31 @@
 # concert-docs-mcp
 
-> **Unofficial** - IBM과 공식적으로 관련 없는 커뮤니티 프로젝트입니다.
+> **Unofficial** — This is a community project and is not officially affiliated with IBM.
 
-IBM Concert 공식 문서를 검색하고 조회할 수 있는 비공식 MCP(Model Context Protocol) 서버입니다.
+An unofficial MCP (Model Context Protocol) server for searching and reading IBM Concert official documentation.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `search_concert_docs` | 키워드로 문서 검색 (290+ 문서, 페이지네이션 지원) |
-| `read_concert_doc` | 특정 문서 페이지를 Markdown으로 조회 |
-| `get_concert_toc` | 전체 목차(TOC) 구조 조회 (섹션 필터 가능) |
+| `search_concert_docs` | Search by keyword (290+ topics, pagination supported) |
+| `read_concert_doc` | Read a specific documentation page and return it as Markdown |
+| `get_concert_toc` | Browse the full table of contents (section filter supported) |
 
 ## Setup
 
 ```bash
-git clone https://github.com/<your-username>/concert-docs-mcp.git
+git clone https://github.com/drewdouglass1/IBM-DOCS-MCP.git
 cd concert-docs-mcp
 npm install
 npm run build
 ```
 
+## MCP Client Configuration
+
 ### IBM Bob
 
-전역 설정(`~/.bob/mcp_settings.json`) 또는 프로젝트 설정(`.bob/mcp.json`)에 추가:
+Add to your global config (`~/.bob/mcp_settings.json`) or project config (`.bob/mcp.json`):
 
 ```json
 {
@@ -39,13 +41,13 @@ npm run build
 
 ### Claude Code
 
-**방법 1: CLI 명령어** (권장)
+**Option 1: CLI** (recommended)
 
 ```bash
 claude mcp add concert-docs -- node /absolute/path/to/concert-docs-mcp/dist/index.js
 ```
 
-**방법 2: `.mcp.json`** (프로젝트 루트에 생성, 팀 공유용)
+**Option 2: `.mcp.json`** (place in project root for team sharing)
 
 ```json
 {
@@ -61,7 +63,7 @@ claude mcp add concert-docs -- node /absolute/path/to/concert-docs-mcp/dist/inde
 
 ### Claude Desktop
 
-`claude_desktop_config.json`에 추가:
+Add to `claude_desktop_config.json`:
 
 ```json
 {
@@ -74,22 +76,22 @@ claude mcp add concert-docs -- node /absolute/path/to/concert-docs-mcp/dist/inde
 }
 ```
 
-> `alwaysAllow`를 설정하면 도구 사용 시 매번 승인하지 않아도 됩니다.
+> Setting `alwaysAllow` means tool calls won't require manual approval each time.
 
 ## Usage Examples
 
 ```
-"application 정의 업데이트 방법 알려줘"
-"inventory 관련 문서 찾아줘"
-"설치 관련 목차 보여줘"
+"How do I update an application definition in Concert?"
+"Find documentation about inventory management"
+"Show me the installation table of contents"
 ```
 
 ## Tech Stack
 
 - TypeScript + Node.js
-- `@modelcontextprotocol/sdk` - MCP 프로토콜 구현
-- `jsdom` + `turndown` - HTML to Markdown 변환
-- IBM Docs API (`ibm.com/docs/api/v1`) - 문서 검색 및 조회
+- `@modelcontextprotocol/sdk` — MCP protocol implementation
+- `jsdom` + `turndown` — HTML to Markdown conversion
+- IBM Docs API (`ibm.com/docs/api/v1`) — documentation search and retrieval
 
 ## License
 
