@@ -73,12 +73,14 @@ If you prefer to configure manually, you can edit your settings files via the UI
     "mas-core-docs-mcp": {
       "command": "npx",
       "args": ["-y", "mas-core-docs-mcp"],
-      "alwaysAllow": ["search_mas_core_docs", "read_mas_core_doc", "get_mas_core_toc"]
+      "alwaysAllow": ["search_mas_core_docs", "read_mas_core_doc", "get_mas_core_toc"],
+      "description": "IBM Maximo Application Suite (full suite) documentation tools"
     },
     "mas-manage-docs-mcp": {
       "command": "npx",
       "args": ["-y", "mas-manage-docs-mcp"],
-      "alwaysAllow": ["search_mas_manage_docs", "read_mas_manage_doc", "get_mas_manage_toc"]
+      "alwaysAllow": ["search_mas_manage_docs", "read_mas_manage_doc", "get_mas_manage_toc"],
+      "description": "IBM Maximo Manage documentation tools"
     }
   }
 }

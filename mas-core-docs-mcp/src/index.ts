@@ -9,14 +9,15 @@ import { extractAndConvert, stripHtmlTags } from "./utils.js";
 const server = new McpServer({
   name: "mas-core-docs",
   version: "1.0.0",
+  description: "IBM Maximo Application Suite (Core) documentation — covers platform-level topics including installation, upgrade, administration, licensing, AppPoints, backup and disaster recovery, security, OpenShift configuration, and suite-wide settings. This is the 'IBM Maximo Application Suite - component' doc set (SSRHPA_cd). For application-specific docs (Manage, Monitor, Health, etc.) use the dedicated application servers.",
 });
 
 // Tool 1: Search docs
 server.tool(
   "search_mas_core_docs",
-  "Search IBM Maximo Application Suite documentation. Returns matching topics with titles, snippets, and URLs.",
+  "Search IBM Maximo Application Suite (Core) documentation covering platform-level topics: installation, upgrade, administration, licensing, AppPoints, backup/DR, security, OpenShift, and suite-wide configuration. Returns matching topics with titles, snippets, and hrefs. Use 'read_mas_core_doc' to retrieve full page content.",
   {
-    query: z.string().describe("Search query (e.g. 'install', 'licensing', 'mongodb', 'operator')"),
+    query: z.string().describe("Search query (e.g. 'install', 'licensing', 'AppPoints', 'backup', 'disaster recovery', 'mongodb', 'operator', 'upgrade', 'security')"),
     start: z.number().optional().default(0).describe("Result offset for pagination"),
     limit: z.number().optional().default(10).describe("Number of results (max 20)"),
   },
@@ -60,7 +61,7 @@ server.tool(
 // Tool 2: Read a doc page
 server.tool(
   "read_mas_core_doc",
-  "Read a specific IBM Maximo Application Suite documentation page and return its content as Markdown. Use the 'href' from search results or TOC.",
+  "Read a specific IBM Maximo Application Suite (Core) documentation page and return its full content as Markdown. Use the 'href' value from search results or the TOC. Covers platform topics: install, upgrade, admin, licensing, backup/DR, security, OpenShift, and suite configuration.",
   {
     href: z
       .string()
@@ -87,12 +88,12 @@ server.tool(
 // Tool 3: Get table of contents
 server.tool(
   "get_mas_core_toc",
-  "Get the table of contents for IBM Maximo Application Suite documentation. Shows the full document structure with sections and topics.",
+  "Get the table of contents for IBM Maximo Application Suite (Core) documentation. Returns the full hierarchy of platform-level sections and topics including installation, upgrade, administration, licensing, AppPoints, backup/DR, security, and OpenShift configuration. Use the returned hrefs with 'read_mas_core_doc' to fetch page content.",
   {
     section: z
       .string()
       .optional()
-      .describe("Optional: filter to a specific section by label (e.g. 'Installing', 'Security', 'Licensing')"),
+      .describe("Optional: filter to a specific top-level section by label or topicId (e.g. 'Installing', 'Security', 'Licensing', 'Upgrading', 'Administering', 'Backup')"),
   },
   async ({ section }) => {
     try {
@@ -129,7 +130,7 @@ server.tool(
         content: [
           {
             type: "text" as const,
-            text: `# IBM Maximo Application Suite - Table of Contents\n\n${formatToc(topics)}`,
+            text: `# IBM Maximo Application Suite (Core) - Table of Contents\n\n${formatToc(topics)}`,
           },
         ],
       };

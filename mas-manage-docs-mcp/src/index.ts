@@ -9,14 +9,15 @@ import { extractAndConvert, stripHtmlTags } from "./utils.js";
 const server = new McpServer({
   name: "mas-manage-docs",
   version: "1.0.0",
+  description: "IBM Maximo Manage documentation — covers the enterprise asset management application built on MAS, including work orders, assets, inventory, purchasing, preventive maintenance, service requests, locations, labor and crew management, reporting, and integration framework configuration.",
 });
 
 // Tool 1: Search docs
 server.tool(
   "search_mas_manage_docs",
-  "Search IBM Maximo Manage documentation. Returns matching topics with titles, snippets, and URLs.",
+  "Search IBM Maximo Manage documentation covering the enterprise asset management application: work orders, assets, inventory, purchasing, preventive maintenance, service requests, locations, labor, crew management, reporting, and integrations. Returns matching topics with titles, snippets, and hrefs. Use 'read_mas_manage_doc' to retrieve full page content.",
   {
-    query: z.string().describe("Search query (e.g. 'work order', 'asset', 'inventory', 'preventive maintenance')"),
+    query: z.string().describe("Search query (e.g. 'work order', 'asset', 'inventory', 'preventive maintenance', 'purchase order', 'service request', 'labor', 'reporting', 'integration')"),
     start: z.number().optional().default(0).describe("Result offset for pagination"),
     limit: z.number().optional().default(10).describe("Number of results (max 20)"),
   },
@@ -60,7 +61,7 @@ server.tool(
 // Tool 2: Read a doc page
 server.tool(
   "read_mas_manage_doc",
-  "Read a specific IBM Maximo Manage documentation page and return its content as Markdown. Use the 'href' from search results or TOC.",
+  "Read a specific IBM Maximo Manage documentation page and return its full content as Markdown. Use the 'href' value from search results or the TOC. Covers asset management topics: work orders, assets, inventory, purchasing, preventive maintenance, service requests, locations, labor, reporting, and integrations.",
   {
     href: z
       .string()
@@ -87,12 +88,12 @@ server.tool(
 // Tool 3: Get table of contents
 server.tool(
   "get_mas_manage_toc",
-  "Get the table of contents for IBM Maximo Manage documentation. Shows the full document structure with sections and topics.",
+  "Get the table of contents for IBM Maximo Manage documentation. Returns the full hierarchy of application sections and topics covering work orders, assets, inventory, purchasing, preventive maintenance, service requests, locations, labor, crew management, reporting, and integrations. Use the returned hrefs with 'read_mas_manage_doc' to fetch page content.",
   {
     section: z
       .string()
       .optional()
-      .describe("Optional: filter to a specific section by label (e.g. 'Work Orders', 'Assets', 'Inventory')"),
+      .describe("Optional: filter to a specific top-level section by label or topicId (e.g. 'Work Orders', 'Assets', 'Inventory', 'Purchasing', 'Preventive Maintenance', 'Reporting', 'Integration')"),
   },
   async ({ section }) => {
     try {

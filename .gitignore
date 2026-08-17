@@ -4,3 +4,4 @@ dist/
 .bob/
 AGENTS.md
 
+.playwright-mcp/
