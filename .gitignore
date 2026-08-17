@@ -1,2 +1,6 @@
 node_modules/
 dist/
+
+.bob/
+AGENTS.md
+mas-mcp-servers-plan.md
