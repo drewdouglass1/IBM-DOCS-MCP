@@ -1,6 +1,6 @@
 {
   "name": "mas-manage-docs-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for IBM Maximo Manage documentation — enterprise asset management application covering work orders, assets, inventory, purchasing, preventive maintenance, service requests, labor, reporting, and integration framework (SSLPL8_cd).",
   "type": "module",
   "main": "dist/index.js",

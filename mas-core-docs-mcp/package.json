@@ -1,6 +1,6 @@
 {
   "name": "mas-core-docs-mcp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "MCP server for IBM Maximo Application Suite (Core) documentation — platform-level topics including installation, upgrade, administration, licensing, AppPoints, backup/DR, security, and OpenShift configuration. Corresponds to the 'IBM Maximo Application Suite - component' doc set (SSRHPA_cd).",
   "type": "module",
   "main": "dist/index.js",
