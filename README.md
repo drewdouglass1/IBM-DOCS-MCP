@@ -37,37 +37,45 @@ Each server exposes three tools:
 
 ---
 
-## Quick Start (npx — no install required)
-
-The fastest way to use these servers is via `npx`. No cloning, no build step — dependencies are resolved automatically on first run.
-
-```bash
-npx mas-core-docs-mcp
-# or
-npx mas-manage-docs-mcp
-```
-
-> Behind a corporate firewall? See [Using a Private / Local Nexus Registry](#using-a-private--local-nexus-registry).
-
----
-
 ## Configuration
 
-Add one or both servers to your MCP client config. Using `npx -y` skips the install confirmation prompt.
+These are published npm packages and can be loaded directly by your MCP client (such as IBM Bob, Claude Code, or Claude Desktop).
 
 ### IBM Bob
 
-Global config (`~/.bob/mcp_settings.json`) or project config (`.bob/mcp.json`):
+IBM Bob has built-in native support for managing and installing MCP servers through its interactive skills:
+
+#### Option 1: Automatic Installation using Bob (Recommended)
+You can ask Bob to configure the server automatically. Bob will verify your Node.js version, test-run the package, and configure your workspace or global settings for you.
+
+Simply type:
+```
+please configure the mas-manage-docs-mcp server
+```
+or
+```
+please configure the mas-core-docs-mcp server
+```
+
+#### Option 2: Manual Configuration
+If you prefer to configure manually, you can edit your settings files via the UI or by directly modifying your JSON configuration:
+
+1. Click the **Settings** (gear) icon in the IBM Bob panel.
+2. Select the **MCP** tab.
+3. Choose the scope you want to configure:
+   - Click **Edit Global MCP** to open `~/.bob/settings/mcp.json` (applies across all workspaces).
+   - Click **Edit Project MCP** to open `.bob/mcp.json` in your current workspace (creates the file if it doesn't exist).
+4. Add the configuration below inside the `mcpServers` object and save the file:
 
 ```json
 {
   "mcpServers": {
-    "mas-core-docs": {
+    "mas-core-docs-mcp": {
       "command": "npx",
       "args": ["-y", "mas-core-docs-mcp"],
       "alwaysAllow": ["search_mas_core_docs", "read_mas_core_doc", "get_mas_core_toc"]
     },
-    "mas-manage-docs": {
+    "mas-manage-docs-mcp": {
       "command": "npx",
       "args": ["-y", "mas-manage-docs-mcp"],
       "alwaysAllow": ["search_mas_manage_docs", "read_mas_manage_doc", "get_mas_manage_toc"]
@@ -75,6 +83,11 @@ Global config (`~/.bob/mcp_settings.json`) or project config (`.bob/mcp.json`):
   }
 }
 ```
+
+> **Note**: Setting `"alwaysAllow"` bypasses individual tool execution permission prompts in IBM Bob.
+* **Global Configuration (IDE)**: `~/.bob/settings/mcp.json`
+* **Global Configuration (Bob Shell)**: `~/.bob/settings/mcp_settings.json`
+* **Project-Level Configuration**: `.bob/mcp.json`
 
 ### Claude Code
 
@@ -123,8 +136,7 @@ claude mcp add mas-manage-docs -- npx -y mas-manage-docs-mcp
 }
 ```
 
-> Add both entries to `mcpServers` to run both servers simultaneously.  
-> `alwaysAllow` skips per-call approval prompts in IBM Bob.
+> Add both entries to `mcpServers` to run both servers simultaneously.
 
 ---
 
