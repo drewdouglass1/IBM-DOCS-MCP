@@ -162,45 +162,6 @@ Then reference the compiled file directly in your MCP config:
 
 ---
 
-## Publishing to npm
-
-Each server is independently publishable. Build first, then publish:
-
-```bash
-cd mas-core-docs-mcp
-npm install && npm run build
-npm publish
-
-cd ../mas-manage-docs-mcp
-npm install && npm run build
-npm publish
-```
-
-Authenticate with your npm token beforehand:
-
-```bash
-npm login
-# or set token directly in ~/.npmrc:
-# //registry.npmjs.org/:_authToken=<your-token>
-```
-
----
-
-## Tech Stack
-
-- TypeScript + Node.js (`"type": "module"`, `module: "Node16"`)
-- [`@modelcontextprotocol/sdk`](https://www.npmjs.com/package/@modelcontextprotocol/sdk) — MCP protocol implementation
-- [`jsdom`](https://www.npmjs.com/package/jsdom) + [`turndown`](https://www.npmjs.com/package/turndown) — HTML → Markdown conversion
-- IBM Docs API (`ibm.com/docs/api/v1`) — documentation search and retrieval
-
----
-
-## License
-
-MIT
-
----
-
 ## Using a Private / Local Nexus Registry
 
 If your environment blocks the public npm registry, point `npm` at your internal Nexus proxy before running `npm install` or `npx`.
@@ -246,3 +207,20 @@ npm run build
 ```
 
 > **Required packages:** `@modelcontextprotocol/sdk`, `jsdom`, `turndown`, `zod` (runtime) · `typescript`, `@types/jsdom`, `@types/turndown` (dev). Ensure all are available in your Nexus proxy before installing.
+
+---
+
+## Tech Stack
+
+- **TypeScript + Node.js** (strict types, `"type": "module"`, `Node16` resolution)
+- **`@modelcontextprotocol/sdk`** — standard protocol layer for tool definition and transport handling
+- **`zod`** — strong, schema-validated input parameter handling for MCP tools
+- **`jsdom`** — fast, lightweight DOM parsing and HTML cleaning
+- **`turndown`** — robust HTML-to-Markdown conversion with customized processing for code blocks, lists, and tables
+- **IBM Docs API v1** — backend search and retrieval engine for authoritative IBM Product Documentation
+
+---
+
+## License
+
+MIT
