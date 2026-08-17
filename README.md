@@ -50,11 +50,11 @@ You can ask Bob to configure the server automatically. Bob will verify your Node
 
 Simply type:
 ```
-please configure the mas-manage-docs-mcp server
+please configure the mas-manage-docs-mcp MCP server
 ```
 or
 ```
-please configure the mas-core-docs-mcp server
+please configure the mas-core-docs-mcp MCP server
 ```
 
 #### Option 2: Manual Configuration
